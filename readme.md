@@ -7,10 +7,7 @@ Then you provide diagrams for the base case and the inductive step and specify h
 
 ## example: unet
 
-```python:
-from interpret import DslInterpreter
-
-"""
+```
 base case:
 a1 ---f1---> b1
 
@@ -19,17 +16,10 @@ a1 -------f1------ > b1
 \                   ^
  \ g1            j1/
   \>a2 ---f2--> b2/
-
-
-to apply again, increment all numbers by 1 and repeat inductive step
-
-e.g. depth 3:
-a1 ----f1---- b1
-\g1          /j1
- a2 ---f2---b2
-  \g2      /j2
-   a3--f3--b3
-"""
+```
+code: 
+```python:
+from interpret import DslInterpreter
 
 base_case = """
 graph LR
