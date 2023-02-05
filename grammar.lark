@@ -1,0 +1,25 @@
+start: flowchart
+
+flowchart: "graph" flow_type flow_statements
+
+flow_type: "LR" | "TB"
+
+flow_statements: flow_statement+
+
+flow_statement: flow_step [src_label] "-->" flow_step [dst_label]  NEWLINE
+
+COMMENT: "%%"  "#" /[^\n]/*
+
+flow_step: /[a-zA-Z]+[a-zA-Z0-9]*/ "_" INT
+
+src_label: "[" /[^\]]+/ "]"
+
+dst_label: "[" /[^\]]+/ "]"
+
+
+%import common.WS
+%import common.NEWLINE
+%import common.INT
+%import common.CNAME
+%ignore WS
+%ignore COMMENT
