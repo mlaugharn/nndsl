@@ -63,7 +63,6 @@ a1 -------f1------ > b1
   \>a2 ---f2--> b2/
 ```
 
-![unet labeled](docs/unet_labeled.png)
 
 to apply again, increment all numbers by 1 and repeat inductive step
 
@@ -77,6 +76,8 @@ a1 ----f1---- b1
 ```
 
 Simple!
+
+![unet labeled](docs/unet_labeled.png)
 
 ## as mermaid:
 
@@ -112,7 +113,6 @@ graph LR
     B_2 --> J_1 %% dec conv -> up conv
     J_1 --> B_1 %% up conv -> dec conv
 ```
-
 
 ---
 *this part not implemented yet*
