@@ -22,7 +22,6 @@ a1 -------f1------ > b1
 define it as a pair of mermaidjs-esque-syntax diagrams:
 
 ```python:
-from interpret import DslInterpreter
 
 base_case = """
 
@@ -44,7 +43,12 @@ graph LR
     J_1 --> B_1 %% up conv -> dec conv
     
 """
+```
 
+To parse + interpret this structure:
+
+```python:
+from interpret import DslInterpreter
 unet_4 = DslInterpreter().apply(base_case, inductive_step, times=4)
 
 G = nx.DiGraph()
