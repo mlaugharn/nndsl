@@ -7,10 +7,6 @@ Then you provide diagrams for the base case and the inductive step and specify h
 
 ## example: unet
 
-
-
-## as python:
-
 ```python:
 from interpret import DslInterpreter
 
@@ -31,11 +27,7 @@ graph LR
 """
 
 unet_4 = DslInterpreter().apply(base_case, inductive_step, times=4)
-```
 
-## plot
-
-```python:
 G = nx.DiGraph()
 for statement in unet_4:
     G.add_edge(statement[0], statement[1])
@@ -49,6 +41,11 @@ nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 plt.title("unet of depth 4")
 plt.show()
 ```
+
+
+which yields
+
+![alt](docs/unet_nx.png)
 
 ### base case:
 
@@ -115,11 +112,6 @@ graph LR
     B_2 --> J_1 %% dec conv -> up conv
     J_1 --> B_1 %% up conv -> dec conv
 ```
-
-
-which yields
-
-![alt](docs/unet_nx.png)
 
 
 ---
