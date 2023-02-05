@@ -10,6 +10,27 @@ Then you provide diagrams for the base case and the inductive step and specify h
 ```python:
 from interpret import DslInterpreter
 
+"""
+base case:
+a1 ---f1---> b1
+
+inductive step:
+a1 -------f1------ > b1
+\                   ^
+ \ g1            j1/
+  \>a2 ---f2--> b2/
+
+
+to apply again, increment all numbers by 1 and repeat inductive step
+
+e.g. depth 3:
+a1 ----f1---- b1
+\g1          /j1
+ a2 ---f2---b2
+  \g2      /j2
+   a3--f3--b3
+"""
+
 base_case = """
 graph LR
     A_1 --> F_1 %% enc conv -> copy and crop
@@ -47,33 +68,6 @@ which yields
 
 ![alt](docs/unet_nx.png)
 
-### base case:
-
-```
-a1 ---f1---> b1
-```
-
-
-### inductive step:
-
-```
-a1 -------f1------ > b1
-\                   ^
- \ g1            j1/
-  \>a2 ---f2--> b2/
-```
-
-
-to apply again, increment all numbers by 1 and repeat inductive step
-
-e.g. depth 3:
-```
-a1 ----f1---- b1
-\g1          /j1
- a2 ---f2---b2
-  \g2      /j2
-   a3--f3--b3
-```
 
 Simple!
 
