@@ -8,6 +8,8 @@ Then you provide diagrams for the base case and the inductive step and specify h
 ## example: unet
 
 ```
+unet is basically a base case + an inductive step
+
 base case:
 a1 ---f1---> b1
 
@@ -17,17 +19,22 @@ a1 -------f1------ > b1
  \ g1            j1/
   \>a2 ---f2--> b2/
 ```
-code: 
+define it as a pair of mermaidjs-esque-syntax diagrams:
+
 ```python:
 from interpret import DslInterpreter
 
 base_case = """
+
+%% comments begin with double percents
 graph LR
     A_1 --> F_1 %% enc conv -> copy and crop
     F_1 --> B_1 %% copy and crop -> dec conv
+    
 """
 
 inductive_step = """
+
 graph LR
     A_1 --> G_1 %% enc conv -> maxpool
     G_1 --> A_2 %% maxpool -> enc conv
@@ -35,6 +42,7 @@ graph LR
     F_2 --> B_2 %% copy and crop -> dec conv
     B_2 --> J_1 %% dec conv -> up conv
     J_1 --> B_1 %% up conv -> dec conv
+    
 """
 
 unet_4 = DslInterpreter().apply(base_case, inductive_step, times=4)
