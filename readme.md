@@ -63,7 +63,7 @@ Simple!
 
 ![unet labeled](docs/unet_labeled.png)
 
-## as mermaid:
+## also valid mermaidjs syntax, to generate diagrams:
 
 base case
 ```
