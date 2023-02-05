@@ -7,12 +7,6 @@ Then you provide diagrams for the base case and the inductive step and specify h
 
 ## example: unet!
 
-![unet architecture](docs/u-net-architecture.png)
-
-## structure
-
-
-
 ### base case:
 
 ```
