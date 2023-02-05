@@ -132,7 +132,7 @@ To make the full module, you just provide 2 dicts of higher-order functions that
 ### Constructors
 Constructors return a *function*, i.e. `module_n = construct(n)()`. 
 
-Continuing with the unet example, the 'a' modules correspond to the transformations that double the channels while downsampling each spatial dimension by 2:
+Continuing with the unet example, the `a` modules correspond to the convolutions that multiply the channels:
 
 
 ```python
