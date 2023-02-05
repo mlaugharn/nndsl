@@ -53,7 +53,7 @@ graph LR
     F_1 --> B_1 %% copy and crop -> dec conv
 ```
 
-```mermaid:
+```mermaid
 graph LR
     A_1 --> F_1 %% enc conv -> copy and crop
     F_1 --> B_1 %% copy and crop -> dec conv
@@ -69,7 +69,7 @@ graph LR
     B_2 --> J_1 %% dec conv -> up conv
     J_1 --> B_1 %% up conv -> dec conv
 ```
-```mermaid:
+```mermaid
 graph LR
     A_1 --> G_1 %% enc conv -> maxpool
     G_1 --> A_2 %% maxpool -> enc conv
