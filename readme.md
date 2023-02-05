@@ -5,7 +5,50 @@ The syntax is quite similar to a subset of mermaid.js, with one additional const
 
 Then you provide diagrams for the base case and the inductive step and specify how many times to apply the inductive step.
 
-## example: unet!
+## example: unet
+
+
+
+## as python:
+
+```python:
+from interpret import DslInterpreter
+
+base_case = """
+graph LR
+    A_1 --> F_1 %% enc conv -> copy and crop
+    F_1 --> B_1 %% copy and crop -> dec conv
+"""
+
+inductive_step = """
+graph LR
+    A_1 --> G_1 %% enc conv -> maxpool
+    G_1 --> A_2 %% maxpool -> enc conv
+    A_2 --> F_2 %% enc conv -> copy and crop
+    F_2 --> B_2 %% copy and crop -> dec conv
+    B_2 --> J_1 %% dec conv -> up conv
+    J_1 --> B_1 %% up conv -> dec conv
+"""
+
+unet_4 = DslInterpreter().apply(base_case, inductive_step, times=4)
+```
+
+## plot
+
+```python:
+G = nx.DiGraph()
+for statement in unet_4:
+    G.add_edge(statement[0], statement[1])
+G.add_edge("in", ("A", 1))
+G.add_edge(("B", 1), "out")
+
+pos = nx.kamada_kawai_layout(G)
+nx.draw(G, pos, with_labels=True)
+labels = nx.get_edge_attributes(G, 'label')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+plt.title("unet of depth 4")
+plt.show()
+```
 
 ### base case:
 
@@ -73,47 +116,6 @@ graph LR
     J_1 --> B_1 %% up conv -> dec conv
 ```
 
-
-## as python:
-
-```python:
-from interpret import DslInterpreter
-
-base_case = """
-graph LR
-    A_1 --> F_1 %% enc conv -> copy and crop
-    F_1 --> B_1 %% copy and crop -> dec conv
-"""
-
-inductive_step = """
-graph LR
-    A_1 --> G_1 %% enc conv -> maxpool
-    G_1 --> A_2 %% maxpool -> enc conv
-    A_2 --> F_2 %% enc conv -> copy and crop
-    F_2 --> B_2 %% copy and crop -> dec conv
-    B_2 --> J_1 %% dec conv -> up conv
-    J_1 --> B_1 %% up conv -> dec conv
-"""
-
-unet_4 = DslInterpreter().apply(base_case, inductive_step, times=4)
-```
-
-## plot
-
-```python:
-G = nx.DiGraph()
-for statement in unet_4:
-    G.add_edge(statement[0], statement[1])
-G.add_edge("in", ("A", 1))
-G.add_edge(("B", 1), "out")
-
-pos = nx.kamada_kawai_layout(G)
-nx.draw(G, pos, with_labels=True)
-labels = nx.get_edge_attributes(G, 'label')
-nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-plt.title("unet of depth 4")
-plt.show()
-```
 
 which yields
 
